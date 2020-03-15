@@ -1,0 +1,18 @@
+# This is a basic workflow to help you get started with Actions
+
+name: update www-cs
+
+on:
+  push:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:   
+  update:
+    runs-on: ubuntu-latest
+  
+    steps:
+    # Runs a single command using the runners shell
+    - name: Update www-test-cs-pull
+      run: |
+        curl -XPOST -u "${{ secrets.GH_USERNAME}}:${{secrets.GH_TOKEN}}" -H "Accept: application/vnd.github.everest-preview+json"  -H "Content-Type: application/json" https://api.github.com/repos/OWASP/www-test-cs-pull/dispatches --data '{"event_type": "build_application"}'
